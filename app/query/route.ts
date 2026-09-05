@@ -1,7 +1,7 @@
-import { neon } from '@neondatabase/serverless';
-const sql = neon(process.env.DATABASE_URL!);
+import { neon } from "@neondatabase/serverless";
 
 async function listInvoices() {
+  const sql = neon(process.env.DATABASE_URL!);
   const data = await sql`
     SELECT invoices.amount, customers.name
     FROM invoices

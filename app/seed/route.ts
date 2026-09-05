@@ -1,11 +1,10 @@
-import bcrypt from 'bcrypt';
-import { neon } from '@neondatabase/serverless';
+import bcrypt from "bcrypt";
+import { neon } from "@neondatabase/serverless";
 
-import { invoices, customers, revenue, users } from '../lib/placeholder-data';
-
-const sql = neon(process.env.DATABASE_URL!);
+import { invoices, customers, revenue, users } from "../lib/placeholder-data";
 
 async function seedUsers() {
+  const sql = neon(process.env.DATABASE_URL!);
   await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
   await sql`
@@ -38,6 +37,7 @@ async function seedUsers() {
 }
 
 async function seedInvoices() {
+  const sql = neon(process.env.DATABASE_URL!);
   await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
   await sql`
@@ -75,6 +75,7 @@ async function seedInvoices() {
 }
 
 async function seedCustomers() {
+  const sql = neon(process.env.DATABASE_URL!);
   await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
   await sql`
@@ -111,6 +112,7 @@ async function seedCustomers() {
 }
 
 async function seedRevenue() {
+  const sql = neon(process.env.DATABASE_URL!);
   await sql`
     CREATE TABLE IF NOT EXISTS revenue (
       month VARCHAR(4) NOT NULL UNIQUE,
@@ -140,7 +142,7 @@ export async function GET() {
     await seedRevenue();
 
     return Response.json({
-      message: 'Database seeded successfully',
+      message: "Database seeded successfully",
     });
   } catch (error) {
     return Response.json({ error: String(error) }, { status: 500 });
